@@ -7,33 +7,38 @@ VgCamera Camera;
 
 VgVideo Video;
 
-
 int main()
 {
 	cv::Mat Image;
 	
 	Image = Camera.TakeImage();
 
-
 	Video.VideoInitialize(
 		Image.rows,
 		Image.cols);
-		
-		Video.SetOutputFileName("TestVideo");
-		
-		Video.SetFormat("h.264");
-		
-		Video.SetFrameRate(15);
-		
-		//Video.OpenVideoFile();
-		
-		for(int i = 1; i < 2; i++)
-		{
-			std::cout << "Saving Image" << std::endl;
-			Image = Camera.TakeImage();
 	
-			Video.OpenVideoFile(Image);
-		}
+	std::cout << "Rows: " << Image.rows << std::endl;
+
+	std::cout << "colums: " << Image.cols << std::endl;
+	
+	Video.SetOutputFileName("TestVideo");
+		
+	Video.SetFormat("h.264");
+		
+	Video.SetFrameRate(1);
+		
+	Video.OpenVideoFile();
+		
+	for(int i = 1; i < 10; i++)
+	{
+		std::cout << "Saving Image" << std::endl;
+	
+		Image = Camera.TakeImage();
+	
+		Video.SetFrame(Image);
+	}
+
+	std::cout << "Completed writting video " << std::endl;
 	
 	return 0;
 }

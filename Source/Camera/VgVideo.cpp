@@ -28,15 +28,15 @@ void VgVideo::CheckCompressionTypes(void)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void VgVideo::VideoInitialize(
-			int ImageWidth,
-			int ImageHeight)
+	int ImageWidth,
+	int ImageHeight)
 {
 	mCameraWidth = ImageWidth;
 	
 	mCameraHeigth = ImageHeight;
 	
-	mImageSize = cv::Size(mCameraWidth,
-		mCameraHeigth);
+	mImageSize = cv::Size(mCameraHeigth,
+		mCameraWidth);
 }
 
 //-----------------------------------------------------------------------------
@@ -65,7 +65,7 @@ void VgVideo::SetFrameRate(int FrameRate)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void VgVideo::OpenVideoFile(cv::Mat Frame)
+void VgVideo::OpenVideoFile(void)
 {
 	if(mOutputName.size() == 0)
 	{
@@ -82,26 +82,15 @@ void VgVideo::OpenVideoFile(cv::Mat Frame)
 	else if (mCameraWidth == 0 || mCameraHeigth == 0)
 	{
 		std::cout << "Please define an image size" << std::endl;
-	}
+	} 
 	else
 	{
 		
-		std::cout << "a" << std::endl;
-		mOutputVideo->open(
+		mOutputVideo.open(
 			mOutputName,
 			mFourCC,
 			mFrameRate,
 			mImageSize);
-			
-			std::cout << "Showing" << std::endl;
-			
-			cv::imshow(
-						"CurrentImage",
-						Frame);
-						
-						while(1){}
-			
-		mOutputVideo->write(Frame);
 			
 		mParametersSet = true;
 	}
@@ -113,9 +102,7 @@ void VgVideo::SetFrame(cv::Mat Frame)
 {
 	if(mParametersSet == true)
 	{
-		std::cout << "Writting video frame" << std::endl;
-		mOutputVideo->write(Frame);
-		std::cout << "Done writting video frame" << std::endl;
+		mOutputVideo.write(Frame);
 	}
 	else
 	{

@@ -19,15 +19,15 @@ class VgVideo
 			int ImageWidth,
 			int ImageHeight);
 			
-			void SetOutputFileName(const std::string);
+		void SetOutputFileName(const std::string);
 			
-			void SetFormat(const std::string);
+		void SetFormat(const std::string);
 			
-			void SetFrameRate(int);
+		void SetFrameRate(int);
 			
-			void OpenVideoFile(cv::Mat);
+		void OpenVideoFile(void);
 			
-			void SetFrame(cv::Mat);
+		void SetFrame(cv::Mat);
 		
 	private:
 		
@@ -42,8 +42,8 @@ class VgVideo
 		int mFourCC;
 		
 		int mFrameRate;
-		
-		cv::VideoWriter *mOutputVideo;
-		
+	
+		cv::VideoWriter mOutputVideo;
+			
 		bool mParametersSet;
 };
