@@ -102,7 +102,12 @@ void VgVideo::SetFrame(cv::Mat Frame)
 {
 	if(mParametersSet == true)
 	{
-		mOutputVideo.write(Frame);
+		mOutputVideo << Frame;
+
+		imshow(
+			"FrameRecorded",
+			Frame);
+
 	}
 	else
 	{

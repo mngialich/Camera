@@ -21,7 +21,7 @@ int main()
 
 	std::cout << "colums: " << Image.cols << std::endl;
 	
-	Video.SetOutputFileName("TestVideo");
+	Video.SetOutputFileName("TestVideoNew");
 		
 	Video.SetFormat("h.264");
 		
@@ -29,7 +29,7 @@ int main()
 		
 	Video.OpenVideoFile();
 		
-	for(int i = 1; i < 10; i++)
+	for(int i = 1; i < 100; i++)
 	{
 		std::cout << "Saving Image" << std::endl;
 	
