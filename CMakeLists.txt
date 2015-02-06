@@ -7,3 +7,6 @@ FIND_PACKAGE(OpenCV REQUIRED)
 ADD_EXECUTABLE(Camera
   Main.cpp
   Source/VCamera.cpp)
+	
+TARGET_LINK_LIBRARIES(Camera
+  ${OpenCV_LIBS} )

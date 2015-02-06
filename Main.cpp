@@ -2,5 +2,9 @@
 
 int main()
 {
+	VCamera UsbCamera;
+	
+	UsbCamera.RecordVideo();
+	
 	return 0;
 }

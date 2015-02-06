@@ -4,6 +4,11 @@
 //-----------------------------------------------------------------------------
 VCamera::VCamera()
 {
+	Camera = 0;
+	
+	OpenCamera();
+	
+	cv::namedWindow("CurrentImage",cv::WINDOW_AUTOSIZE);
 }
 
 //-----------------------------------------------------------------------------
@@ -16,5 +21,22 @@ VCamera::~VCamera()
 //-----------------------------------------------------------------------------
 void VCamera::OpenCamera(void)
 {
-	
+	if(!Camera.isOpened())
+	{
+		std::cout << "Camera failed to open" << std::endl;
+	}
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void VCamera::RecordVideo(void)
+{
+	while(1)
+	{
+		Camera >> mCurrentFrame;
+		
+		cv::imshow(
+			"CurrentImage",
+			mCurrentFrame);
+	}
 }
