@@ -4,16 +4,23 @@ PROJECT(TEGRACAMERA)
 
 FIND_PACKAGE(OpenCV REQUIRED)
 
+if(APPLE)
+  set(CUDA_HOST_COMPILER /usr/bin/clang)
+endif()
 # Add CUDA Package
 
 FIND_PACKAGE(CUDA REQUIRED)
 
+CUDA_INCLUDE_DIRECTORIES(/Developer/NVIDIA/CUDA-6.5/include/)
+
 INCLUDE_DIRECTORIES(
-  ${CUDE_CUT_INCLUDE_DIR})
+  ${CUDA_CUT_INCLUDE_DIR})
 
 CUDA_ADD_EXECUTABLE(Camera
   Main.cpp
-  Source/VCamera.cpp)
+  Source/VCamera.cpp
+  Source/VCudaEncoder.cpp)
 	
 TARGET_LINK_LIBRARIES(Camera
-  ${OpenCV_LIBS} )
+  ${OpenCV_LIBS}
+  ${CUDA_LIBRARY})
