@@ -12,7 +12,9 @@ class VgCamera
 		~VgCamera();
 		
 		cv::Mat TakeImage();
-				
+
+		cv::VideoCapture GetVideoHandle(void);				
+
 	private:
 		
 		void OpenCamera(void);

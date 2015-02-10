@@ -25,10 +25,13 @@ class VgVideo
 			
 		void SetFrameRate(int);
 			
-		void OpenVideoFile(void);
+		void OpenVideoFile(cv::VideoCapture);
 			
 		void SetFrame(cv::Mat);
-		
+
+		void CloseVideo(void);
+
+		void DisplayVideo(void);		
 	private:
 		
 		cv::Size mImageSize;

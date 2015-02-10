@@ -11,8 +11,12 @@ int main()
 {
 	cv::Mat Image;
 	
-	Image = Camera.TakeImage();
+	cv::VideoCapture CameraHandle;
 
+	CameraHandle = Camera.GetVideoHandle();
+ 
+	Image = Camera.TakeImage();
+	
 	Video.VideoInitialize(
 		Image.rows,
 		Image.cols);
@@ -21,13 +25,13 @@ int main()
 
 	std::cout << "colums: " << Image.cols << std::endl;
 	
-	Video.SetOutputFileName("TestVideoNew");
+	Video.SetOutputFileName("TestVideoNew.avi");
 		
 	Video.SetFormat("h.264");
 		
-	Video.SetFrameRate(1);
+	Video.SetFrameRate(10);
 		
-	Video.OpenVideoFile();
+	Video.OpenVideoFile(CameraHandle);
 		
 	for(int i = 1; i < 100; i++)
 	{
@@ -38,7 +42,11 @@ int main()
 		Video.SetFrame(Image);
 	}
 
+	Video.CloseVideo();
+
 	std::cout << "Completed writting video " << std::endl;
+
+	Video.DisplayVideo();
 	
 	return 0;
 }

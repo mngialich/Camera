@@ -65,7 +65,7 @@ void VgVideo::SetFrameRate(int FrameRate)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void VgVideo::OpenVideoFile(void)
+void VgVideo::OpenVideoFile(cv::VideoCapture VideoHandle)
 {
 	if(mOutputName.size() == 0)
 	{
@@ -85,12 +85,19 @@ void VgVideo::OpenVideoFile(void)
 	} 
 	else
 	{
-		
 		mOutputVideo.open(
+			"TestName",
+			VideoHandle.get(CV_CAP_PROP_FOURCC),
+			VideoHandle.get(30),
+			cv::Size(
+				VideoHandle.get(CV_CAP_PROP_FRAME_WIDTH),
+				VideoHandle.get(CV_CAP_PROP_FRAME_HEIGHT)));	
+		
+		/*mOutputVideo.open(
 			mOutputName,
 			mFourCC,
 			mFrameRate,
-			mImageSize);
+			mImageSize);*/
 			
 		mParametersSet = true;
 	}
@@ -102,7 +109,7 @@ void VgVideo::SetFrame(cv::Mat Frame)
 {
 	if(mParametersSet == true)
 	{
-		mOutputVideo << Frame;
+		mOutputVideo.write(Frame);
 
 		imshow(
 			"FrameRecorded",
@@ -116,4 +123,27 @@ void VgVideo::SetFrame(cv::Mat Frame)
 }
 
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void VgVideo::CloseVideo(void)
+{
+	mOutputVideo.release();
+}
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void VgVideo::DisplayVideo(void)
+{
+	cv::VideoCapture video("TestVideoNew.avi");
+
+	cv::Mat Frame;
+
+	std::cout << "Displaying Video" << std::endl;
+
+	while(video.read(Frame))
+	{
+		imshow("Frame Grabber",
+			Frame);
+
+	}
+}

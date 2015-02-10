@@ -40,3 +40,9 @@ cv::Mat VgCamera::TakeImage(void)
 	return(mCurrentFrame);
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+cv::VideoCapture VgCamera::GetVideoHandle(void)
+{
+	return(Camera);
+}
