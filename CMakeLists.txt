@@ -1,26 +1,18 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-PROJECT(TEGRACAMERA)
+PROJECT(TegraCompression)
 
 FIND_PACKAGE(OpenCV REQUIRED)
 
-if(APPLE)
-  set(CUDA_HOST_COMPILER /usr/bin/clang)
-endif()
-# Add CUDA Package
-
-FIND_PACKAGE(CUDA REQUIRED)
-
-CUDA_INCLUDE_DIRECTORIES(/Developer/NVIDIA/CUDA-6.5/include/)
-
 INCLUDE_DIRECTORIES(
-  ${CUDA_CUT_INCLUDE_DIR})
+  /usr/local/Cellar/glib/2.40.0_1/lib/glib-2.0/include/
+  /usr/local/Cellar/glib/2.40.0_1/include/glib-2.0/
+  /usr/local/Cellar/gstreamer/1.4.5/include/gstreamer-1.0/)
 
-CUDA_ADD_EXECUTABLE(Camera
-  Main.cpp
-  Source/VCamera.cpp
-  Source/VCudaEncoder.cpp)
-	
+ADD_EXECUTABLE(Camera
+  Source/Main.cpp
+	Source/Camera/VgCamera.cpp
+	Source/Camera/VgVideo.cpp)
+
 TARGET_LINK_LIBRARIES(Camera
-  ${OpenCV_LIBS}
-  ${CUDA_LIBRARY})
+  ${OpenCV_LIBS})

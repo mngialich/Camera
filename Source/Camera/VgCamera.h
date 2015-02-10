@@ -3,21 +3,21 @@
 #include "opencv2/opencv.hpp"
 #include <iostream>
 
-class VCamera
+class VgCamera
 {
 	public:
 		
-		VCamera();
-	
-		~VCamera();
+		VgCamera();
 		
-		void RecordVideo(void);
-	
+		~VgCamera();
+		
+		cv::Mat TakeImage();
+				
 	private:
 		
 		void OpenCamera(void);
 		
-		cv::VideoCapture Camera;		
+		cv::VideoCapture Camera;
 		
 		cv::Mat mCurrentFrame;
 };

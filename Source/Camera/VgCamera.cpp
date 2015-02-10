@@ -1,8 +1,8 @@
-#include "VCamera.h"
+#include "VgCamera.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-VCamera::VCamera()
+VgCamera::VgCamera()
 {
 	Camera = 0;
 	
@@ -13,30 +13,30 @@ VCamera::VCamera()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-VCamera::~VCamera()
+VgCamera::~VgCamera()
 {	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void VCamera::OpenCamera(void)
+void VgCamera::OpenCamera(void)
 {
 	if(!Camera.isOpened())
 	{
 		std::cout << "Camera failed to open" << std::endl;
 	}
+	else
+	{
+		std::cout << "Camera was opened" << std::endl;
+	}
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void VCamera::RecordVideo(void)
+cv::Mat VgCamera::TakeImage(void)
 {
-	while(1)
-	{
-		Camera >> mCurrentFrame;
-		
-		cv::imshow(
-			"CurrentImage",
-			mCurrentFrame);
-	}
+	Camera >> mCurrentFrame;
+	
+	return(mCurrentFrame);
 }
+
