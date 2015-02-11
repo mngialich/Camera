@@ -2,9 +2,13 @@
 
 #include "opencv2/opencv.hpp"
 #include <iostream>
+#include <boost/thread/thread.hpp>
+
 
 class VgCamera
 {
+	boost::mutex mutex; 
+	
 	public:
 		
 		VgCamera();
@@ -15,7 +19,7 @@ class VgCamera
 		
 		void TakeImage(cv::Mat *);
 
-		cv::VideoCapture GetVideoHandle(void);				
+		cv::VideoCapture GetVideoHandle(void);
 
 	private:
 		

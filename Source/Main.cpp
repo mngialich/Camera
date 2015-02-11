@@ -2,6 +2,8 @@
 #include "Camera/VgCamera.h"
 #include "Camera/VgVideo.h"
 #include "opencv2/opencv.hpp"
+#include <boost/thread/thread.hpp>
+#include <boost/timer.hpp>
 
 VgCamera Camera;
 
@@ -11,11 +13,15 @@ int main()
 {
 	cv::Mat *Image;
 	
+	cv::Mat *WriteImage;
+	
 	cv::VideoCapture CameraHandle;
 
 	CameraHandle = Camera.GetVideoHandle();
  
 	Image = Camera.TakeInitialImage();
+	
+	WriteImage = Camera.TakeInitialImage();
 	
 	Video.VideoInitialize(
 		Image->rows,
@@ -29,17 +35,30 @@ int main()
 		
 	Video.SetFormat("h.264");
 		
-	Video.SetFrameRate(30);
+	Video.SetFrameRate(20);
 			
 	Video.OpenVideoFile(CameraHandle);
-			
+				
 	for(int i = 1; i < 1000; i++)
 	{
+		boost::timer Start;
+		
 		std::cout << "Saving Image" << std::endl;
+		
+		boost::thread CameraThread(
+			boost::bind(&VgCamera::TakeImage, &Camera, Image));
+		
+		*WriteImage = *Image;
+		
+		boost::thread VideoThread(
+			boost::bind(&VgVideo::SetFrame, &Video, WriteImage));
 			
-		Camera.TakeImage(Image);
-	
-		Video.SetFrame(Image);
+		CameraThread.join();
+		VideoThread.join();
+		
+		double TotalTime = Start.elapsed();
+		
+		std::cout << "Frame Rate: " << 1 / TotalTime << std::endl;
 	}
 
 	Video.CloseVideo();

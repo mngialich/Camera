@@ -42,7 +42,11 @@ cv::Mat* VgCamera::TakeInitialImage(void)
 //-----------------------------------------------------------------------------
 void VgCamera::TakeImage(cv::Mat *Image)
 {
+	mutex.lock();
+		
 	Camera >> *Image;
+	
+	mutex.unlock();
 }
 
 //-----------------------------------------------------------------------------

@@ -4,10 +4,10 @@ PROJECT(TegraCompression)
 
 FIND_PACKAGE(OpenCV REQUIRED)
 
+FIND_PACKAGE(Boost COMPONENTS thread system)
+
 INCLUDE_DIRECTORIES(
-  /usr/local/Cellar/glib/2.40.0_1/lib/glib-2.0/include/
-  /usr/local/Cellar/glib/2.40.0_1/include/glib-2.0/
-  /usr/local/Cellar/gstreamer/1.4.5/include/gstreamer-1.0/)
+	${Boost_INCLUDE_DIRS})
 
 ADD_EXECUTABLE(Camera
   Source/Main.cpp
@@ -15,4 +15,6 @@ ADD_EXECUTABLE(Camera
 	Source/Camera/VgVideo.cpp)
 
 TARGET_LINK_LIBRARIES(Camera
-  ${OpenCV_LIBS})
+	${OpenCV_LIBS}
+	${Boost_THREAD_LIBRARY}
+	${Boost_SYSTEM_LIBRARY})

@@ -101,8 +101,11 @@ void VgVideo::SetFrame(cv::Mat *Frame)
 {
 	if(mParametersSet == true)
 	{
+		mutex.lock();
+		
 		mOutputVideo.write(*Frame);
-
+		
+		mutex.unlock();
 	}
 	else
 	{
