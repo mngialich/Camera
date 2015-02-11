@@ -85,19 +85,19 @@ void VgVideo::OpenVideoFile(cv::VideoCapture VideoHandle)
 	} 
 	else
 	{
-		mOutputVideo.open(
+		/*mOutputVideo.open(
 			"TestName",
 			VideoHandle.get(CV_CAP_PROP_FOURCC),
 			VideoHandle.get(30),
 			cv::Size(
 				VideoHandle.get(CV_CAP_PROP_FRAME_WIDTH),
-				VideoHandle.get(CV_CAP_PROP_FRAME_HEIGHT)));	
+				VideoHandle.get(CV_CAP_PROP_FRAME_HEIGHT)));*/
 		
-		/*mOutputVideo.open(
+		mOutputVideo.open(
 			mOutputName,
 			mFourCC,
 			mFrameRate,
-			mImageSize);*/
+			mImageSize);
 			
 		mParametersSet = true;
 	}
@@ -110,10 +110,6 @@ void VgVideo::SetFrame(cv::Mat Frame)
 	if(mParametersSet == true)
 	{
 		mOutputVideo.write(Frame);
-
-		imshow(
-			"FrameRecorded",
-			Frame);
 
 	}
 	else

@@ -46,7 +46,7 @@ int main()
 
 	std::cout << "Completed writting video " << std::endl;
 
-	Video.DisplayVideo();
+	//Video.DisplayVideo();
 	
 	return 0;
 }
