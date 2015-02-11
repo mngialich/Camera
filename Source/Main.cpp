@@ -15,7 +15,7 @@ int main()
 
 	CameraHandle = Camera.GetVideoHandle();
  
-	Image = Camera.TakeImage();
+	Image = Camera.TakeInitialImage();
 	
 	Video.VideoInitialize(
 		Image->rows,
@@ -29,15 +29,15 @@ int main()
 		
 	Video.SetFormat("h.264");
 		
-	Video.SetFrameRate(10);
+	Video.SetFrameRate(30);
 			
 	Video.OpenVideoFile(CameraHandle);
 			
-	for(int i = 1; i < 10000; i++)
+	for(int i = 1; i < 1000; i++)
 	{
 		std::cout << "Saving Image" << std::endl;
 			
-		Image = Camera.TakeImage();
+		Camera.TakeImage(Image);
 	
 		Video.SetFrame(Image);
 	}

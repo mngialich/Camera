@@ -11,7 +11,9 @@ class VgCamera
 		
 		~VgCamera();
 		
-		cv::Mat* TakeImage();
+		cv::Mat* TakeInitialImage();
+		
+		void TakeImage(cv::Mat *);
 
 		cv::VideoCapture GetVideoHandle(void);				
 
