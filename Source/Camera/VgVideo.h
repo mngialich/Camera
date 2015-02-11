@@ -27,7 +27,7 @@ class VgVideo
 			
 		void OpenVideoFile(cv::VideoCapture);
 			
-		void SetFrame(cv::Mat);
+		void SetFrame(cv::Mat*);
 
 		void CloseVideo(void);
 

@@ -31,11 +31,11 @@ void VgCamera::OpenCamera(void)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-cv::Mat VgCamera::TakeImage(void)
+cv::Mat* VgCamera::TakeImage(void)
 {
 	Camera >> mCurrentFrame;
 	
-	return(mCurrentFrame);
+	return(&mCurrentFrame);
 }
 
 //-----------------------------------------------------------------------------
